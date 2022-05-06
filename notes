@@ -6,3 +6,6 @@ df.rename(columns={'m': 'Date', 'TagName': 'Tag', 'Unnamed: 2': 'Posts'}, inplac
 
 # grouping by the tag (designating which programming language the post was about) and summing to see the total # of posts since 2008 (the length of the data)
 df.groupby('Tag').sum()
+
+# grouping by the tag column and counting the # of rows for each language. The rows were separated by month so this tells us how many months there was a post for each language.
+df.groupby('Tag').count()
