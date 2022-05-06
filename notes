@@ -1,0 +1,8 @@
+# import the csv into a dataframe, and renaming the columns upon import (setting the header to 0 allows us to import our own column names)
+df = pd.read_csv('QueryResults.csv', names=['DATE', 'TAG', 'POSTS'], header=0)
+
+# you can also rename the column after importing, by designating what old columns we want to rename, and then what we want the new names to be (inplace=True makes the change permanent)
+df.rename(columns={'m': 'Date', 'TagName': 'Tag', 'Unnamed: 2': 'Posts'}, inplace=True)
+
+# grouping by the tag (designating which programming language the post was about) and summing to see the total # of posts since 2008 (the length of the data)
+df.groupby('Tag').sum()
