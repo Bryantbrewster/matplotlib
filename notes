@@ -9,3 +9,16 @@ df.groupby('Tag').sum()
 
 # grouping by the tag column and counting the # of rows for each language. The rows were separated by month so this tells us how many months there was a post for each language.
 df.groupby('Tag').count()
+
+# converting an entire columns format (using Pandas' to_datetime() method )
+df.Date = pd.to_datetime(df.Date)
+
+# creating a new dataframe, in the shape of a pivot table
+# index = rows, columns = columns, values = values
+
+# if we want to replace all of the NaN values with zero, we can do this
+# don't forget the inplace=True or it won't update the actual df and you'd need something like this: reshaped_df = reshaped_df.fillna(0) 
+reshaped_df.fillna(0, inplace=True)
+
+# this will check if there are any NaN values at all in the dataframe, so you don't have to look manually
+reshaped_df.isna().values.any()
