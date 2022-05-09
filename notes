@@ -15,6 +15,8 @@ df.Date = pd.to_datetime(df.Date)
 
 # creating a new dataframe, in the shape of a pivot table
 # index = rows, columns = columns, values = values
+pivoted_df = test_df.pivot(index='Age', columns='Actor', values='Power')
+
 
 # if we want to replace all of the NaN values with zero, we can do this
 # don't forget the inplace=True or it won't update the actual df and you'd need something like this: reshaped_df = reshaped_df.fillna(0) 
