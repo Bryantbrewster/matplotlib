@@ -22,3 +22,45 @@ reshaped_df.fillna(0, inplace=True)
 
 # this will check if there are any NaN values at all in the dataframe, so you don't have to look manually
 reshaped_df.isna().values.any()
+
+# MATPLOTLIB
+
+# how to plot a basic single line chart (remember that this df is in the shape of a pivot table, w/ index being the rows (dates) and the columns being each programming language, the values being the # of posts each month on Stack Overflow)
+# plt.plot(reshaped_df.index, reshaped_df['java'])
+
+# formatting on the chart
+plt.figure(figsize=(16,10)) <- setting the size of the entire figure
+plt.xticks(fontsize=14) <- size of the x-axis tick marks
+plt.yticks(fontsize=14) <- size of the y-axis tick marks
+plt.xlabel('Date',fontsize=14) <- setting the x-axis label and font size
+plt.ylabel('Number of Posts', fontsize=14) <- setting the y-axis label and font size
+plt.ylim(0, 35000) <- setting the limits of the y-axis
+plt.plot(reshaped_df.index, reshaped_df['java'])
+
+
+# adding a second line and a legend w/ labels
+plt.plot(reshaped_df.index, reshaped_df['java'], label = 'Java')
+plt.plot(reshaped_df.index, reshaped_df['python'], label = 'Python')
+plt.legend()
+
+# if I have a lot of different lines/columns I need to graph, instead of typing a bunch of lines I can use a for loop to loop through the columns and plot each individual one
+for column in reshaped_df.columns:
+    plt.plot(reshaped_df.index, reshaped_df[column], 
+             linewidth=3, label=reshaped_df[column].name)
+# the above loop iterates through each column (coding language in our case) and plugs each language in to the loop and plots it
+
+
+# Creating a rolling average to smooth out the time series data
+rolling_avg = reshaped_df.rolling(window=6).mean() <- creates a NEW DATAFRAME, that inputs the rolling average (using the past 6 observations) as the values in the table
+plt.figure(figsize=(16,10))
+plt.xticks(fontsize=14)
+plt.yticks(fontsize=14)
+plt.xlabel('Date', fontsize=14)
+plt.ylabel('Number of Posts', fontsize=14)
+plt.ylim(0, 35000)
+
+# this for loop then plots the data using the newly created, rolling average, dataframe
+for column in rolling_avg.columns:
+    plt.plot(rolling_avg.index, rolling_avg[column], 
+             linewidth=3, label=rolling_avg[column].name)
+plt.legend(fontsize=16)
