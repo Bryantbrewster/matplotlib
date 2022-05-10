@@ -28,6 +28,8 @@ reshaped_df.isna().values.any()
 
 # MATPLOTLIB
 
+# import matplotlib.pyplot as plt
+
 # how to plot a basic single line chart (remember that this df is in the shape of a pivot table, w/ index being the rows (dates) and the columns being each programming language, the values being the # of posts each month on Stack Overflow)
 # plt.plot(reshaped_df.index, reshaped_df['java'])
 
